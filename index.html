@@ -50,7 +50,7 @@
                 <h1 class="text-2xl font-bold tracking-tight">Anatomía del Dorso</h1>
             </div>
             <div id="progress-container" class="hidden flex items-center gap-3">
-                <span class="text-sm font-medium text-slate-300">Pregunta <span id="current-q">1</span>/<span id="total-q">20</span></span>
+                <span class="text-sm font-medium text-slate-300">Pregunta <span id="current-q">1</span>/<span id="total-q">10</span></span>
                 <div class="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
                     <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-300" style="width: 0%"></div>
                 </div>
@@ -62,7 +62,7 @@
             <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-6 text-blue-600">
                 <i class="fas fa-bone text-4xl"></i>
             </div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-8">Cuestionario de Profundización</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Cuestionario de Anatomía</h2>
             
             <button onclick="startQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-xl transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
                 <span>Iniciar Cuestionario</span>
@@ -74,7 +74,7 @@
         <div id="quiz-screen" class="hidden flex-1 flex flex-col p-6 fade-in">
             <!-- Question Text -->
             <div class="mb-6">
-                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full mb-3 tracking-wide uppercase" id="q-category">Categoría</span>
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full mb-3 tracking-wide uppercase" id="q-category">Pregunta</span>
                 <h3 id="q-text" class="text-xl md:text-2xl font-semibold text-gray-800 leading-relaxed">
                     <!-- Pergunta aqui -->
                 </h3>
@@ -129,267 +129,127 @@
 
     <!-- Scripts -->
     <script>
-        // Data Base de Questões (20 Perguntas baseadas no PDF - Traduzidas para Espanhol)
+        // Data Base de Questões (10 Nuevas Preguntas)
         const quizData = [
             {
-                category: "Introducción y Función",
-                question: "El texto introductorio define el dorso como la 'pared posterior' del cuerpo, esencial para la postura y el movimiento. Considerando la relación funcional descrita, si un paciente presenta incapacidad de extender el tronco, pero preserva la rotación e inclinación lateral, ¿qué conclusión biomecánica es más coherente con la organización muscular descrita?",
+                category: "Miología",
+                question: "¿En qué plano muscular se encuadra el músculo dorsal ancho?",
                 options: [
-                    "La lesión afectó exclusivamente el plano superficial (Trapecio y Latísimo), ya que son los principales extensores posturales.",
-                    "Hubo un compromiso bilateral selectivo de la columna del Músculo Longísimo y Espinoso, preservando la acción unilateral de los rotadores.",
-                    "La 'Masa Común' (tendón de origen) se rompió, desconectando mecánicamente todos los músculos del dorso de la pelvis.",
-                    "La falla funcional sugiere parálisis de los músculos de la pared anterolateral del abdomen, que son agonistas de la extensión.",
-                    "El ligamento nucal fue seccionado, impidiendo la transmisión de fuerza de la región cervical a la torácica."
-                ],
-                correct: 1,
-                explanation: "La extensión del tronco es producida primariamente por la contracción bilateral de los músculos erectores (como el Longísimo y Espinoso). Si el paciente aún logra rotar o inclinar (acciones unilaterales), la musculatura está activa, pero la coordinación o fuerza bilateral para la extensión está fallando."
-            },
-            {
-                category: "Miología: Grupos Musculares",
-                question: "El texto organiza los músculos de la pared posterior en tres grupos (posterior, medio y anterior). Con base en la didáctica presentada, ¿por qué los músculos Psoas (que se insertan en las vértebras lumbares) no fueron detallados en la sección de 'Músculos del Dorso' (Grupo Posterior)?",
-                options: [
-                    "Porque se sitúan anatómicamente por delante de las apófisis transversas (grupo anterior), actuando funcionalmente sobre el fémur y flexión del tronco, no como extensores dorsales puros.",
-                    "Porque son considerados músculos del miembro inferior y no poseen ninguna inserción en la columna vertebral.",
-                    "Porque pertenecen al plano superficial del dorso, cubriendo el cuadrado lumbar, y el texto se centró solo en los planos profundos.",
-                    "Porque son músculos exclusivamente respiratorios, sin función en la estática de la columna vertebral.",
-                    "Porque anatómicamente están localizados dentro del canal vertebral, junto con la médula espinal."
-                ],
-                correct: 0,
-                explanation: "El texto clasifica los músculos del dorso como aquellos ubicados 'detrás de los canales vertebrales' (Grupo Posterior). El grupo anterior (como el Psoas) se encuentra por delante de las apófisis transversas y tiene función flexora/locomotora."
-            },
-            {
-                category: "Plano Profundo: Masa Común",
-                question: "La 'Masa Común' se describe como una estructura de anclaje sacrolumbar. Desde el punto de vista de la transmisión de fuerzas, ¿cuál sería la consecuencia mecánica inmediata si esta aponeurosis perdiera su rigidez tendinosa y se volviera puramente muscular (elástica)?",
-                options: [
-                    "Habría un aumento en la eficiencia de la contracción, ya que el músculo contrae mejor que el tendón.",
-                    "La columna lumbar ganaría más movilidad en rotación, ya que los tendones limitan este movimiento.",
-                    "La eficiencia de los músculos erectores (Iliocostal y Longísimo) disminuiría drásticamente, pues perderían su punto fijo rígido en la pelvis para apalancar la extensión del tronco.",
-                    "No habría cambio, ya que el origen real de estos músculos es en las costillas y no en la pelvis.",
-                    "El músculo Transversoespinoso asumiría toda la carga, hipertrofiándose inmediatamente."
-                ],
-                correct: 2,
-                explanation: "Para que un músculo actúe como palanca eficaz, necesita un punto de origen rígido. La 'Masa Común' tendinosa proporciona esa fijación inelástica en el sacro/pelvis. Si fuera elástica, la fuerza se disiparía estirando el origen en lugar de mover la carga (el tronco)."
-            },
-            {
-                category: "Plano Serratos Posteriores",
-                question: "El texto diferencia el plano de los Serratos del plano profundo por su función respiratoria. Considerando la dirección de las fibras del Serrato Posterior Inferior (ascienden superolateralmente de la columna hacia las costillas), ¿cuál es la mecánica exacta de su acción espiratoria?",
-                options: [
-                    "Al contraerse, sus fibras tiran de las últimas costillas hacia arriba, expandiendo la caja torácica.",
-                    "Al contraerse, estabiliza la escápula para permitir que el Latísimo del Dorso comprima el tórax.",
-                    "Al tomar punto fijo en las apófisis espinosas, sus fibras traccionan las últimas costillas hacia abajo y hacia medial, reduciendo el volumen torácico.",
-                    "Su contracción relaja el diafragma, permitiendo que el aire salga pasivamente de los pulmones.",
-                    "Actúa únicamente impidiendo que las costillas flotantes se desplacen durante la inspiración profunda."
-                ],
-                correct: 2,
-                explanation: "La anatomía dicta la función: originándose en las espinas y yendo hacia las costillas (de abajo hacia arriba), cuando se contrae, tira de las costillas *hacia abajo* (depresión), auxiliando la espiración forzada."
-            },
-            {
-                category: "Fascia Intermedia",
-                question: "Entre los dos músculos serratos posteriores existe la 'Fascia Intermedia'. El texto menciona que es resultado de una regresión muscular ancestral. ¿Cuál es la importancia funcional actual de esta lámina fascial para la mecánica escapular?",
-                options: [
-                    "Sirve como el principal tendón de inserción para el músculo Trapecio.",
-                    "Actúa como una superficie de deslizamiento lisa sobre la cual la escápula (y los músculos anteriores a ella) puede moverse libremente sin fricción contra los erectores profundos.",
-                    "Es responsable de nutrir los músculos romboides a través de su vascularización intrínseca.",
-                    "Impide que la columna torácica realice movimientos de extensión excesiva.",
-                    "Conecta rígidamente las costillas a la columna, impidiendo movimientos respiratorios en esa zona."
-                ],
-                correct: 1,
-                explanation: "El texto destaca que, hoy, esta fascia actúa como una 'superficie de deslizamiento para la escápula', permitiendo que el cíngulo escapular se mueva suavemente sobre la musculatura profunda del dorso."
-            },
-            {
-                category: "Músculos Romboides",
-                question: "Los Romboides son aductores y elevadores de la escápula. Sin embargo, el texto menciona que provocan el 'descenso del muñón del hombro'. ¿Cómo se explica esta aparente paradoja (elevar la escápula pero bajar el hombro)?",
-                options: [
-                    "Es un error del texto; si elevan la escápula, el hombro obligatoriamente sube.",
-                    "Al aducir la escápula, comprimen el tórax, lo que visualmente parece bajar el hombro.",
-                    "Debido a la rotación de la escápula (el ángulo inferior se mueve medialmente y hacia arriba), la cavidad glenoidea (donde encaja el húmero) se orienta hacia abajo, bajando la articulación del hombro.",
-                    "El Romboides Mayor tira del hombro hacia abajo, mientras que el Menor tira hacia arriba, y el Mayor es más fuerte.",
-                    "Solo bajan el hombro cuando el músculo Trapecio está paralizado."
-                ],
-                correct: 2,
-                explanation: "El movimiento es rotacional (basculamiento). Al tirar del borde medial y del ángulo inferior hacia arriba y hacia adentro, la 'punta' opuesta de la escápula (glenoides/hombro) bascula hacia abajo."
-            },
-            {
-                category: "Dorsal Ancho (Latísimo)",
-                question: "El Músculo Dorsal Ancho es un poderoso aductor y rotador medial del brazo. El texto cita una función inversa: 'si toma punto fijo en el brazo... eleva el tronco'. ¿En qué escenario clínico o actividad diaria es esta función inversa la principal actuante?",
-                options: [
-                    "Al sostener una bolsa pesada de compras con el brazo estirado.",
-                    "Al realizar el movimiento de saludar (abducción del brazo).",
-                    "En pacientes parapléjicos que utilizan los brazos para levantar la cadera y transferirse de la silla de ruedas a la cama.",
-                    "Al realizar flexiones de brazo (push-ups) en el suelo.",
-                    "Durante la fase de balanceo de la marcha normal."
-                ],
-                correct: 2,
-                explanation: "Esta es la aplicación clásica de la 'cadena cinética cerrada' del Latísimo. Al fijar las manos, la contracción tira del tronco y la pelvis hacia arriba (acción de trepar descrita en el texto), esencial para transferencias en usuarios de sillas de ruedas."
-            },
-            {
-                category: "Trapecio",
-                question: "El Trapecio posee tres porciones con vectores de fuerza distintos. Si un paciente sufre una laceración exclusiva en las fibras transversas (medias) del Trapecio, ¿qué movimiento específico de la escápula estaría más perjudicado, basándose en la descripción del texto?",
-                options: [
-                    "La elevación pura del hombro (encoger los hombros).",
-                    "La aducción pura (aproximación de la escápula hacia la columna vertebral).",
-                    "La depresión de la escápula contra resistencia.",
-                    "La rotación superior de la cavidad glenoidea.",
-                    "La extensión de la cabeza y el cuello."
-                ],
-                correct: 1,
-                explanation: "El texto define claramente: 'las medias aducen la escápula (la acercan a la columna)'. Las superiores elevan y las inferiores la descienden."
-            },
-            {
-                category: "Osteología: Vértebra Tipo",
-                question: "En la descripción de la 'Vértebra Tipo', se menciona que los pedículos poseen escotaduras que forman los agujeros de conjunción. Si hubiera una hipertrofia ósea en los márgenes de estas escotaduras, ¿qué estructura vital descrita en la introducción sería inmediatamente comprometida?",
-                options: [
-                    "La médula espinal propiamente dicha.",
-                    "El disco intervertebral.",
-                    "La arteria vertebral.",
-                    "La raíz nerviosa (nervio espinal) que emerge en ese nivel.",
-                    "El ligamento amarillo."
+                    "Plano profundo",
+                    "Plano de los músculos serratos posteriores",
+                    "Plano de los músculos romboides",
+                    "Plano superficial"
                 ],
                 correct: 3,
-                explanation: "Los pedículos delimitan el 'agujero de conjunción' (foramen intervertebral). Es por este orificio lateral que la raíz nerviosa sale del canal. El estrechamiento aquí causa compresión radicular."
+                explanation: "Correcto. El dorsal ancho, junto con el trapecio, forma parte del plano superficial de los músculos del dorso."
             },
             {
-                category: "Vértebras Cervicales",
-                question: "Las vértebras cervicales poseen 'apófisis unciformes' (ganchos) en el cuerpo vertebral. Biomecánicamente, ¿cuál es la ventaja de seguridad que estas elevaciones laterales confieren a la columna cervical, que es muy móvil?",
+                category: "Miología",
+                question: "¿Cuál de los siguientes músculos pertenece al grupo erector de la columna?",
                 options: [
-                    "Impiden la hiperextensión del cuello, protegiendo la médula.",
-                    "Aumentan la estabilidad lateral, previniendo que una vértebra se deslice hacia el lado en relación con la otra (traslación lateral).",
-                    "Sirven únicamente para proteger la arteria vertebral de compresiones.",
-                    "Sustituyen la función de los discos intervertebrales, que están ausentes en esta región.",
-                    "Permiten mayor rotación axial entre las vértebras C3 y C7."
-                ],
-                correct: 1,
-                explanation: "Los procesos uncinados forman una especie de 'rieles' laterales en el cuerpo vertebral. Esto estabiliza la articulación uncovertebral, impidiendo que las vértebras resbalen lateralmente."
-            },
-            {
-                category: "Atlas y Axis",
-                question: "El Atlas (C1) no posee cuerpo vertebral. El texto menciona que el Diente del Axis actúa como un 'pivote'. Si el Ligamento Transverso del Atlas (mostrado en la Fig. 4) se rompiera, ¿qué sucedería con el Diente del Axis durante una flexión del cuello?",
-                options: [
-                    "El diente se fracturaría inmediatamente.",
-                    "El diente permanecería fijo, pero el Atlas rotaría 360 grados.",
-                    "El diente se inclinaría hacia atrás, comprimiendo directamente la médula espinal en el nivel C1-C2.",
-                    "No sucedería nada, pues los ligamentos alares son suficientes para mantener la estabilidad.",
-                    "El Axis se fusionaría instantáneamente al hueso occipital."
+                    "Romboides mayor",
+                    "Trapecio",
+                    "Longísimo",
+                    "Serrato posterior superior"
                 ],
                 correct: 2,
-                explanation: "El ligamento transverso sujeta el Diente contra el arco anterior del Atlas. Sin él, en flexión, el Atlas va hacia adelante y deja el Diente 'suelto' para invadir el canal medular posteriormente, causando lesión grave."
+                explanation: "Correcto. El grupo erector de la columna está compuesto por el iliocostal, el longísimo y el espinoso."
             },
             {
-                category: "Vértebras Torácicas",
-                question: "Las apófisis espinosas torácicas se describen como 'inclinadas hacia abajo', disponiéndose como tejas. Además de la protección, ¿qué limitación de movimiento impone drásticamente esta anatomía ósea a la columna torácica en comparación con la lumbar?",
+                category: "Miología",
+                question: "La masa común (tendón de origen del erector de la columna) se localiza principalmente a nivel:",
                 options: [
-                    "Impide casi totalmente la rotación axial.",
-                    "Limita severamente la hiperextensión (inclinarse hacia atrás), ya que los procesos óseos chocan unos con otros.",
-                    "Facilita la flexión lateral excesiva.",
-                    "Impide la flexión hacia adelante, protegiendo el corazón.",
-                    "No impone limitación, es solo estética."
-                ],
-                correct: 1,
-                explanation: "La disposición en 'tejas de techo' crea un bloqueo óseo mecánico (choque de las espinosas) cuando se intenta extender la columna torácica, limitando mucho este movimiento en esta región."
-            },
-            {
-                category: "Vértebras Lumbares",
-                question: "Las vértebras lumbares tienen cuerpos voluminosos y apófisis articulares orientadas vertical y medialmente. El texto dice que esta orientación articular 'bloquea la rotación'. ¿Por qué es evolutivamente ventajoso bloquear la rotación en la región lumbar?",
-                options: [
-                    "Para obligar al ser humano a rotar solo el cuello.",
-                    "Para proteger los órganos abdominales de torsión.",
-                    "Porque el disco intervertebral lumbar soporta gran carga vertical, y la adición de fuerza de torsión (cizallamiento) causaría ruptura fácil del anillo fibroso.",
-                    "Porque los músculos lumbares no son lo suficientemente fuertes para producir rotación.",
-                    "Para permitir que la médula espinal termine en L2 sin ser torcida."
+                    "Cervical",
+                    "Torácico superior",
+                    "Sacrolumbar",
+                    "Occipital"
                 ],
                 correct: 2,
-                explanation: "La región lumbar carga el peso del tronco. El disco es excelente para compresión, pero pésimo para torsión. Las facetas articulares bloquean la rotación para proteger el disco de fuerzas de cizallamiento."
+                explanation: "Correcto. La masa común es una potente estructura tendinosa en la región sacrolumbar que da origen a los músculos erectores."
             },
             {
-                category: "Transición Lumbosacra",
-                question: "La 5ª vértebra lumbar (L5) tiene un cuerpo cuneiforme. El texto cita que contribuye a la lordosis y se articula con el sacro. Debido a la inclinación del sacro (Promontorio), existe una tendencia natural de L5 a deslizarse hacia adelante y abajo. ¿Qué estructura ósea del arco posterior impide este deslizamiento anterior?",
+                category: "Funcional",
+                question: "¿Cuál es la función principal del músculo transversoespinoso?",
                 options: [
-                    "El cuerpo vertebral de S1.",
-                    "Las apófisis articulares inferiores de L5 enganchándose en las superiores del Sacro.",
-                    "El ligamento longitudinal anterior.",
-                    "La apófisis espinosa de L4.",
-                    "El disco intervertebral L5-S1."
-                ],
-                correct: 1,
-                explanation: "Es el encaje óseo (gancho) de las facetas articulares lo que impide que L5 se deslice hacia adelante sobre el plano inclinado del sacro (espondilolistesis)."
-            },
-            {
-                category: "Sacro y Cóccix",
-                question: "Los agujeros sacros anteriores permiten la salida de los ramos anteriores de los nervios sacros. Si una masa tumoral creciera en la cara pélvica (anterior) del sacro, bloqueando los agujeros S2-S4, ¿qué función sería primariamente afectada?",
-                options: [
-                    "La sensibilidad de la piel de la espalda en la región lumbar.",
-                    "La fuerza de extensión de la pierna (nervio femoral).",
-                    "La función esfinteriana y parasimpática pélvica (plexo sacro), además del músculo piriforme.",
-                    "La estabilidad de la articulación sacroilíaca.",
-                    "La irrigación sanguínea de las piernas."
+                    "Aducción del miembro superior",
+                    "Inspiración forzada",
+                    "Estabilización y rotación de la columna",
+                    "Elevación de la escápula"
                 ],
                 correct: 2,
-                explanation: "Los ramos anteriores que salen por los agujeros sacros anteriores forman el plexo sacro, responsable de la inervación del periné, esfínteres y región posterior del muslo/pierna."
+                explanation: "Correcto. Este grupo muscular profundo conecta vértebras adyacentes y es crucial para estabilizar y rotar la columna."
             },
             {
-                category: "Articulaciones y Discos",
-                question: "El disco intervertebral posee un núcleo pulposo y un anillo fibroso. El texto menciona que deformaciones del núcleo permiten movimiento. Si el anillo fibroso pierde su integridad en un punto posterior, ¿por qué la flexión de la columna agrava el riesgo de desplazamiento posterior del núcleo (hernia)?",
+                category: "Osteología",
+                question: "¿Qué característica es típica de una vértebra cervical?",
                 options: [
-                    "Porque la flexión relaja el ligamento longitudinal posterior.",
-                    "Porque en la flexión, las vértebras pinzan la parte ANTERIOR del disco, empujando el fluido del núcleo hacia ATRÁS, contra la zona fragilizada.",
-                    "Porque la flexión aumenta el diámetro del canal vertebral, succionando el disco hacia adentro.",
-                    "Porque la flexión tensa la médula, que tira del disco.",
-                    "La flexión en realidad protege el disco; el peligro es la extensión."
-                ],
-                correct: 1,
-                explanation: "Mecánica hidráulica básica: si aprietas la parte delantera de un globo (flexión anterior de la vértebra), el contenido va hacia atrás. Si la pared trasera (anillo fibroso) está débil, el núcleo hernia posteriormente."
-            },
-            {
-                category: "Hernia de Disco",
-                question: "El texto explica que las hernias son frecuentemente posterolaterales debido a la disposición del Ligamento Longitudinal Posterior. ¿Qué hay en la anatomía de este ligamento que deja la zona posterolateral vulnerable?",
-                options: [
-                    "Es muy ancho y fino, cubriendo todo, pero es débil.",
-                    "Es estrecho en la región lumbar, cubriendo bien la línea media, pero dejando los laterales del disco desprotegidos.",
-                    "No existe en la región lumbar.",
-                    "Posee agujeros naturales para el paso de arterias.",
-                    "Es más fuerte en los laterales que en el centro."
-                ],
-                correct: 1,
-                explanation: "El Ligamento Longitudinal Posterior es más estrecho en la región lumbar. Refuerza el centro, pero deja una laguna en los laterales posteriores, que es exactamente por donde las hernias suelen salir."
-            },
-            {
-                category: "Punción Lumbar: Anatomía",
-                question: "Durante la punción lumbar, el médico pide al paciente realizar una flexión máxima del tronco. Anatómicamente, ¿cuál es el objetivo primordial de esta maniobra sobre los elementos óseos del arco posterior?",
-                options: [
-                    "Estirar la médula espinal para que se vuelva más fina.",
-                    "Aumentar la presión del líquido cefalorraquídeo para facilitar la recolección.",
-                    "Separar las láminas y apófisis espinosas de las vértebras L3-L4, ampliando el espacio interlaminar para el paso de la aguja.",
-                    "Relajar los músculos del dorso para que la aguja duela menos.",
-                    "Comprimir las venas epidurales para evitar sangrado."
+                    "Apófisis espinosa larga e inclinada hacia abajo",
+                    "Cuerpo vertebral reniforme",
+                    "Agujero transverso en las apófisis transversas",
+                    "Ausencia de apófisis espinosa"
                 ],
                 correct: 2,
-                explanation: "La flexión separa los procesos espinosos (como abrir un abanico), aumentando la 'ventana' ósea por donde la aguja debe pasar para llegar al canal."
+                explanation: "Correcto. La presencia del agujero (foramen) transverso para el paso de la arteria vertebral es el rasgo distintivo de las vértebras cervicales."
             },
             {
-                category: "Punción Lumbar: Seguridad",
-                question: "La punción se realiza en L3-L4 o L4-L5 porque la médula termina en L1-L2. ¿Qué existe en el canal vertebral debajo de L2 que hace segura la punción, y por qué esa estructura no es perforada fácilmente por la aguja?",
+                category: "Osteología",
+                question: "¿Cuál de las siguientes vértebras carece de cuerpo vertebral?",
                 options: [
-                    "No existe nada, el canal está vacío.",
-                    "Existe solo grasa y vasos.",
-                    "Existe la 'Cauda Equina' (raíces nerviosas sueltas), que flotan en el líquido y tienden a apartarse de la aguja, a diferencia de la médula sólida.",
-                    "Existe el Filum Terminale, que es duro como hueso.",
-                    "Existe la médula sacra, que es inmune a perforaciones."
-                ],
-                correct: 2,
-                explanation: "Debajo de L2 tenemos la Cauda Equina. Como son hilos nerviosos sueltos flotando en el líquido, la aguja tiende a empujarlos hacia un lado sin perforarlos, diferente de la médula sólida que sería lesionada."
-            },
-            {
-                category: "Integración Final",
-                question: "Analizando la columna como un todo: Las curvaturas y los discos funcionan como un sistema de resorte. Si fusionáramos todas las vértebras en una varilla recta y sólida, ¿qué función biomecánica crucial se perdería, afectando al cerebro durante la caminata?",
-                options: [
-                    "La capacidad de proteger la médula espinal.",
-                    "La capacidad de amortiguación de cargas axiales; cada paso enviaría choques vibratorios directos al cráneo.",
-                    "La capacidad de sostener el peso de los brazos.",
-                    "La capacidad de respirar, pues las costillas no se moverían.",
-                    "La capacidad de inervar los miembros inferiores."
+                    "C2 (Axis)",
+                    "C1 (Atlas)",
+                    "T1",
+                    "L1"
                 ],
                 correct: 1,
-                explanation: "Las curvas fisiológicas funcionan como un amortiguador de automóvil. Una columna recta transfiere el impacto del pie en el suelo directamente a la base del cráneo. Las curvas disipan esa energía."
+                explanation: "Correcto. El Atlas (C1) es una vértebra atípica que no tiene cuerpo vertebral; está formada por masas laterales y arcos."
+            },
+            {
+                category: "Osteología",
+                question: "Las fositas costales en el cuerpo vertebral son características de las vértebras:",
+                options: [
+                    "Cervicales",
+                    "Torácicas",
+                    "Lumbares",
+                    "Sacras"
+                ],
+                correct: 1,
+                explanation: "Correcto. Las fositas costales sirven para articularse con las costillas, por lo que son exclusivas de las vértebras torácicas."
+            },
+            {
+                category: "Clínica",
+                question: "¿En qué nivel se realiza habitualmente la punción lumbar en el adulto?",
+                options: [
+                    "L1–L2",
+                    "L2–L3",
+                    "L3–L4 o L4–L5",
+                    "L5–S1"
+                ],
+                correct: 2,
+                explanation: "Correcto. Se realiza en L3-L4 o L4-L5 para asegurar que la aguja se introduzca por debajo del cono medular (que termina en L1-L2)."
+            },
+            {
+                category: "Clínica",
+                question: "La dirección más frecuente de las hernias de disco intervertebral se explica anatómicamente por:",
+                options: [
+                    "La disposición del ligamento longitudinal anterior",
+                    "La orientación de las apófisis articulares",
+                    "La disposición del ligamento longitudinal posterior",
+                    "La forma del cuerpo vertebral"
+                ],
+                correct: 2,
+                explanation: "Correcto. El ligamento longitudinal posterior es más estrecho o festoneado lateralmente, dejando una zona de debilidad posterolateral."
+            },
+            {
+                category: "Articulaciones",
+                question: "¿Qué tipo de articulación une los cuerpos vertebrales entre sí?",
+                options: [
+                    "Sinovial plana",
+                    "Sincondrosis",
+                    "Sínfisis",
+                    "Gínglimo"
+                ],
+                correct: 2,
+                explanation: "Correcto. La unión entre los cuerpos vertebrales mediante el disco intervertebral se clasifica como una articulación tipo sínfisis (cartilaginosa secundaria)."
             }
         ];
 
@@ -500,7 +360,7 @@
                 document.getElementById('feedback-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
                 feedbackArea.className = "mt-auto bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg";
             } else {
-                feedbackTitle.innerText = "Incorrecto. La lógica correcta es:";
+                feedbackTitle.innerText = "Incorrecto. La respuesta correcta es:";
                 feedbackTitle.className = "font-bold text-red-700 mb-1";
                 document.getElementById('feedback-icon').innerHTML = '<i class="fas fa-info-circle text-red-600 text-xl"></i>';
                 feedbackArea.className = "mt-auto bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg";
@@ -542,10 +402,10 @@
 
             // Mensagem
             const msg = document.getElementById('final-msg');
-            if (percentage === 100) msg.innerText = "¡Excelente! Dominas la anatomía funcional del dorso.";
-            else if (percentage >= 80) msg.innerText = "¡Gran trabajo! Tienes una comprensión sólida, solo algunos detalles para revisar.";
-            else if (percentage >= 60) msg.innerText = "Buen comienzo. Revisar los conceptos de biomecánica y miología profunda ayudará a consolidar el conocimiento.";
-            else msg.innerText = "Sigue estudiando. Enfócate en las relaciones funcionales entre huesos y músculos.";
+            if (percentage === 100) msg.innerText = "¡Excelente! Dominas la anatomía del dorso.";
+            else if (percentage >= 80) msg.innerText = "¡Gran trabajo! Tienes una comprensión sólida.";
+            else if (percentage >= 60) msg.innerText = "Buen comienzo. Revisa los conceptos donde fallaste.";
+            else msg.innerText = "Sigue estudiando. Repasa la anatomía básica del dorso.";
         }
 
         function restartQuiz() {
